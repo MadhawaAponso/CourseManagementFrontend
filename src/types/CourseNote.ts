@@ -7,3 +7,11 @@ export interface CourseNoteResponseDTO {
   uploadedBy: string;
   lectureTitle: string;
 }
+
+export interface CourseNoteRequestDTO{
+  lectureId:number;
+  noteTitle:string;
+  filePath:string;
+  fileType:string;
+  uploadedBy:number
+}
