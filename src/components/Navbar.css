@@ -1,0 +1,69 @@
+/* src/components/Navbar.css */
+.navbar {
+  background-color: #ffffff;
+  padding: 0 2rem;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  height: 70px;
+  display: flex;
+  justify-content: space-between; /* This is the key change */
+  align-items: center;
+  border-bottom: 1px solid #e0e0e0;
+}
+
+.navbar-links {
+  list-style: none;
+  display: flex;
+  gap: 1.5rem;
+  margin: 0;
+  padding: 0;
+}
+
+.navbar li a {
+  display: flex;
+  align-items: center;
+  padding: 0.5rem 1rem;
+  text-decoration: none;
+  color: #555;
+  font-weight: 600;
+  font-size: 1rem;
+  border-radius: 8px;
+  position: relative;
+  transition: color 0.3s ease;
+}
+
+.navbar li a::after {
+  content: '';
+  position: absolute;
+  width: 0;
+  height: 2px;
+  bottom: -5px;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: #2980b9;
+  transition: width 0.3s ease;
+}
+
+.navbar li a:hover {
+  color: #2980b9;
+}
+
+.navbar li a:hover::after {
+  width: 100%;
+}
+
+.logout-button {
+  background-color: transparent;
+  border: none;
+  color: #555;
+  font-weight: 600;
+  font-size: 1rem;
+  cursor: pointer;
+  padding: 0.5rem 1rem;
+  border-radius: 8px;
+  transition: color 0.3s ease, background-color 0.3s ease;
+}
+
+.logout-button:hover {
+  color: #c0392b;
+  background-color: rgba(192, 57, 43, 0.1);
+}

@@ -1,0 +1,133 @@
+/* src/pages/style/LecturePage.css */
+
+.lecture-page {
+  max-width: 1200px;
+  margin: 2rem auto;
+  padding: 2rem;
+  background-color: #f8f9fa;
+}
+
+/* Loading and Error States */
+.lecture-loading,
+.lecture-error {
+  text-align: center;
+  font-size: 1.5rem;
+  padding: 4rem;
+  color: #666;
+}
+
+/* Lecture Header Card */
+.lecture-header-card {
+  background-color: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  padding: 2rem;
+  margin-bottom: 2.5rem;
+}
+
+.lecture-header-card h2 {
+  font-size: 2.25rem;
+  margin-top: 0;
+  margin-bottom: 1rem;
+  color: #333;
+}
+
+.lecture-header-card p {
+  font-size: 1.1rem;
+  color: #555;
+  line-height: 1.7;
+  margin-bottom: 0.5rem;
+}
+
+.lecture-header-card p strong {
+  color: #2c3e50;
+}
+
+.lecture-header-card a {
+  color: #2f80ed;
+  font-weight: bold;
+  text-decoration: none;
+}
+
+.lecture-header-card a:hover {
+  text-decoration: underline;
+}
+
+/* Notes and Assignments Sections */
+.notes-section,
+.assignments-section {
+  margin-bottom: 2.5rem;
+}
+
+.notes-section h3,
+.assignments-section h3 {
+  font-size: 1.75rem;
+  color: #333;
+  margin-bottom: 1.5rem;
+  border-bottom: 2px solid #e0e0e0;
+  padding-bottom: 0.5rem;
+}
+
+.notes-section ul,
+.assignments-section ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: grid;
+  gap: 1rem;
+}
+
+/* Note and Assignment Items */
+.note-item,
+.assignment-item {
+  background-color: #ffffff;
+  border-radius: 10px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.07);
+  padding: 1.5rem;
+}
+
+.note-item a {
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: #2f80ed;
+  text-decoration: none;
+}
+
+.note-item a:hover {
+  text-decoration: underline;
+}
+
+.note-item p,
+.assignment-item p {
+  margin: 0.5rem 0 0 0;
+  color: #555;
+}
+
+.assignment-item h4 {
+  font-size: 1.25rem;
+  margin: 0 0 0.5rem 0;
+  color: #333;
+}
+
+/* Empty State */
+.empty-state {
+  background-color: #f0f0f0;
+  padding: 1.5rem;
+  border-radius: 8px;
+  text-align: center;
+  color: #777;
+  font-style: italic;
+}
+
+/* src/pages/style/LecturePage.css */
+.assignment-link {
+  display: block;
+  text-decoration: none;
+  color: inherit;
+  padding: 1rem;
+  border-radius: 8px;
+  transition: background 0.1s ease;
+}
+.assignment-link:hover {
+  background: rgba(0, 0, 0, 0.03);
+}

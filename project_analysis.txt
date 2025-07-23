@@ -1,0 +1,78 @@
+
+# Project Analysis: Course Management Frontend
+
+This document provides an overview of the frontend codebase for the Course Management application.
+
+## 1. Overall Architecture
+
+The application is a single-page application (SPA) built with **React** and **TypeScript**, using **Vite** as the build tool.
+
+- **Framework:** React.js (v18)
+- **Language:** TypeScript
+- **Routing:** `react-router-dom` is used for client-side routing.
+- **API Communication:** `axios` is used for making HTTP requests to the backend.
+- **Styling:** Plain CSS with a per-component approach. CSS files are located alongside the components they style.
+
+## 2. Folder and File Structure
+
+The `src` directory is organized as follows:
+
+- **`components/`**: Contains reusable UI components that are not tied to a specific page, such as the `Navbar`.
+- **`pages/`**: Contains top-level components that correspond to application routes (e.g., `Login`, `Register`, `Dashboard`).
+- **`routes/`**: Defines the application's routing structure using `react-router-dom`.
+- **`services/`**: Handles all API communication. It abstracts the logic for making backend calls.
+- **`types/`**: Contains TypeScript type definitions and interfaces for data structures used throughout the application (e.g., `UserRequestDTO`).
+- **`assets/`**: Static assets like images and SVGs.
+- **`main.tsx`**: The entry point of the application.
+- **`App.tsx`**: The root React component.
+
+## 3. Key Responsibilities and Functions
+
+### Components & Pages
+
+- **`App.tsx`**: The main application component that renders the `AppRoutes`.
+- **`main.tsx`**: Initializes the React application and sets up the `BrowserRouter`.
+- **`components/Navbar.tsx`**: A navigation bar with links to different parts of the application.
+- **`pages/Login.tsx`**:
+    - Renders the login form.
+    - Manages form state for username and password.
+    - Calls `authService.loginUser` on form submission.
+    - Stores the JWT token in `localStorage` upon successful login.
+    - Navigates the user to the dashboard.
+- **`pages/Register.tsx`**:
+    - Renders the user registration form.
+    - Manages form state for user details.
+    - Performs client-side validation.
+    - Calls `authService.registerUser` on submission.
+    - Displays success or error messages.
+- **`pages/Dashboard.tsx`**: A placeholder page for authenticated users.
+- **`pages/CoursePage.tsx`**: Fetches and displays details for a specific course.
+- **`pages/EnrolledCoursesPage.tsx`**: Fetches and displays a list of courses a student is enrolled in.
+- **`pages/AlertMessage.tsx`**: A reusable component for displaying success and error messages.
+
+### Services
+
+- **`services/axios.tsx`**:
+    - Creates a centralized `axios` instance with a pre-configured `baseURL`.
+    - Implements a request interceptor that automatically attaches the `Authorization` header with the JWT token from `localStorage` to every outgoing request. This is a crucial pattern for authenticating API calls.
+- **`services/authService.tsx`**:
+    - **`registerUser`**: Sends a POST request to the `/auth/register` endpoint.
+    - **`loginUser`**: Sends a POST request to the Keycloak token endpoint to get an access token. It constructs the `x-www-form-urlencoded` body required by OAuth2.
+
+### Routing
+
+- **`routes/AppRoutes.tsx`**: Defines all the application routes using `<Routes>` and `<Route>` from `react-router-dom`. It maps URL paths to their corresponding page components.
+
+## 4. Common Patterns and Practices
+
+- **Component-Based Architecture**: The UI is broken down into reusable components.
+- **State Management**: Component-level state is managed using the `useState` hook. There is no global state management library (like Redux or Zustand) in use yet.
+- **Data Fetching**: The `useEffect` hook is used to trigger API calls when a component mounts. Loading and error states are managed within the component's state.
+- **Type Safety**: TypeScript is used throughout the project to define props, state, and API data structures, ensuring better code quality and developer experience.
+- **Authentication Flow**:
+    1. User logs in via the `Login` page.
+    2. `authService` retrieves a JWT from the backend.
+    3. The token is stored in `localStorage`.
+    4. The `axios` interceptor includes this token in the headers of all subsequent requests.
+- **Error Handling**: `try...catch` blocks are used within async functions (especially for API calls) to handle errors. Error messages are stored in the component state and displayed to the user.
+- **Form Handling**: Forms are implemented as controlled components, where the component's state is the single source of truth for the input values.

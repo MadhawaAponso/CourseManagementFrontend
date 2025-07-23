@@ -1,0 +1,81 @@
+This document provides a comprehensive analysis of the Course Management System's frontend, built with React and TypeScript.
+
+### **1. Project Overview**
+
+This is a single-page application (SPA) designed for a course management platform. It serves two primary user roles: **students** and **instructors**. The application allows users to register, log in, view courses, manage lectures, handle assignments, and provide feedback.
+
+- **Technology Stack**:
+  - **Framework**: React 18+
+  - **Language**: TypeScript
+  - **Build Tool**: Vite
+  - **Routing**: `react-router-dom`
+  - **HTTP Client**: `axios`
+  - **Styling**: A mix of plain CSS modules and Bootstrap for base styling.
+  - **Authentication**: JWT-based, integrating with a Keycloak identity server.
+
+### **2. Core Functionality & Features**
+
+- **Authentication & Authorization**:
+  - Users can **register** as either a student or an instructor.
+  - Users can **log in** to receive a JWT access token, which is stored in `localStorage`.
+  - The `useAuth` hook decodes the JWT to verify authentication status and extract user roles (`student`, `instructor`).
+  - **Protected Routes** (`ProtectedRoute.tsx`) restrict access to pages based on authentication status and user roles. Unauthorized users are redirected.
+
+- **Course & Lecture Management**:
+  - **Enrolled Courses**: Students can view a list of their enrolled courses (`EnrolledCoursesPage.tsx`).
+  - **Course Details**: Both roles can view a detailed page for each course, which includes a list of its lectures (`CoursePage.tsx`).
+  - **Lecture Details**: A dedicated page shows details for a single lecture, including its associated notes and assignments (`Lecture.tsx`).
+
+- **Assignments & Submissions**:
+  - Students can view assignment details from the lecture page (`AssignmentPage.tsx`).
+  - A form (`AssignmentSubmissionForm.tsx`) allows students to submit their work. The form also displays their existing submission if one has been made.
+
+- **Feedback System**:
+  - A `FeedbackSection.tsx` component is integrated into the `CoursePage`.
+  - **Students** can submit a rating and textual feedback for a course.
+  - **Instructors** can view all feedback submitted for a course.
+
+### **3. Project Structure (`src` directory)**
+
+- **`main.tsx`**: The application entry point. It sets up the React root, Strict Mode, and `BrowserRouter`.
+- **`App.tsx`**: The root component that renders `AppRoutes`.
+- **`routes/AppRoutes.tsx`**: Defines all application routes using `react-router-dom`, including public routes, protected routes, and a 404 fallback.
+- **`components/`**: Contains reusable, general-purpose components:
+  - `Navbar.tsx`: The main navigation bar.
+  - `ProtectedRoute.tsx`: The HOC for route protection.
+  - `AssignmentSubmissionForm.tsx`: The form for assignment submissions.
+- **`pages/`**: Contains top-level components, each representing a full page or view.
+  - `Login.tsx` & `Register.tsx`: Authentication pages.
+  - `Dashboard.tsx`: The main landing page after login.
+  - `EnrolledCoursesPage.tsx`, `CoursePage.tsx`, `Lecture.tsx`, `AssignmentPage.tsx`: Core feature pages.
+  - `style/`: Contains CSS files scoped to their respective page components.
+- **`services/`**: Modules responsible for API communication.
+  - `axios.tsx`: A pre-configured `axios` instance with a `baseURL` and an interceptor that attaches the JWT `Authorization` header to all outgoing requests.
+  - `authService.tsx`: Handles login and registration API calls.
+  - `submissionService.tsx`: Handles fetching and submitting assignments.
+- **`hooks/`**: Custom React hooks.
+  - `useAuth.tsx`: A critical hook that provides authentication state (`isAuthenticated`) and user `roles` to any component that needs it.
+- **`types/`**: Contains all TypeScript interface definitions (`.ts` files) for data transfer objects (DTOs) and other data structures used in the application. This ensures type safety across components and services.
+
+### **4. Data Flow & State Management**
+
+- **State**: The application primarily relies on local component state managed by the `useState` and `useEffect` hooks. There is no global state management library like Redux or Zustand.
+- **Data Fetching**: API calls are initiated within `useEffect` hooks in the page components. The logic is delegated to functions in the `services` directory.
+- **API Interaction**:
+  - The `axios` instance in `services/axios.tsx` is the central point for all backend communication.
+  - The backend is expected to be running at `http://localhost:8080`.
+  - Authentication with Keycloak happens at `http://localhost:8181`.
+
+### **5. Styling**
+
+- The project uses a hybrid styling approach.
+- `bootstrap/dist/css/bootstrap.min.css` is imported globally in `main.tsx` for foundational styles.
+- Component-specific styles are defined in separate `.css` files (e.g., `Login.css`, `CoursePage.css`) and imported directly into the components. This approach mimics scoped styling but is not strictly enforced by a CSS-in-JS library.
+
+### **6. Key Files for AI Understanding**
+
+- **`routes/AppRoutes.tsx`**: To understand the overall page structure and navigation flow.
+- **`hooks/useAuth.tsx`**: To understand how authentication state and roles are managed and propagated.
+- **`services/axios.tsx`**: To understand the base configuration for all API calls.
+- **`pages/CoursePage.tsx` & `pages/Lecture.tsx`**: As they are central hubs of functionality, demonstrating how data for courses, lectures, notes, and assignments is fetched and displayed.
+- **`types/*.ts`**: To understand the shape of the data being passed throughout the application.

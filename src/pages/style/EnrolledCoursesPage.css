@@ -1,0 +1,74 @@
+/* src/pages/style/EnrolledCoursesPage.css */
+
+.enrolled-courses-container {
+  max-width: 1200px;
+  margin: 2rem auto;
+  padding: 2rem;
+  background-color: #f9f9f9;
+  border-radius: 12px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+}
+
+.enrolled-courses-container h2 {
+  text-align: center;
+  margin-bottom: 2rem;
+  color: #333;
+  font-size: 2rem;
+}
+
+.course-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 1.5rem;
+}
+
+/* Treat the link as a card container */
+.course-card {
+  display: block;               /* make the <a> fill its grid cell */
+  text-decoration: none;        /* remove underline */
+  color: inherit;               /* inherit your text color instead of blue */
+
+  background-color: #ffffff;
+  border-radius: 10px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  padding: 1.5rem;
+  transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+}
+
+.course-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.12);
+}
+
+.course-card h3 {
+  font-size: 1.25rem;
+  margin-top: 0;
+  margin-bottom: 0.5rem;
+  color: #333;
+}
+
+.course-code {
+  font-size: 1rem;
+  color: #666;
+  font-weight: normal;
+}
+
+.course-card p {
+  margin-bottom: 0.5rem;
+  color: #555;
+  line-height: 1.6;
+}
+
+.course-card p strong {
+  color: #333;
+}
+
+.error {
+  color: #a94442;
+  background-color: #fdecea;
+  border: 1px solid #f5c6cb;
+  padding: 1rem;
+  border-radius: 6px;
+  text-align: center;
+  font-weight: bold;
+}
