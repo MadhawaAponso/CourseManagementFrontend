@@ -38,3 +38,10 @@ export async function updateLecture(
 export async function deleteLecture(id: number): Promise<void> {
   await api.delete(`/lectures/${id}`);
 }
+export async function getCurrentWeekInstructor(instructorId: number): Promise<LectureResponseDTO[]> {
+  const res = await api.get<LectureResponseDTO[]>(
+    "/lectures/week/current/instructor",
+    { params: { instructorId } }
+  );
+  return res.data;
+}

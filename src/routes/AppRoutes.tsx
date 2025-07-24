@@ -9,6 +9,10 @@ import Unauthorized from "../pages/Unautherized";
 import LecturePage from "../pages/Lecture";
 import AssignmentPage from "../pages/AssignmentPage";
 import Layout from "../components/Layout"; // Import the Layout component
+import Homepage from "../pages/HomePage";
+import AvailableCoursesPage from "../pages/AvailableCoursePage";
+import CreateCoursePage from "../components/CreateCoursePage";
+
 
 export default function AppRoutes() {
   return (
@@ -38,6 +42,12 @@ export default function AppRoutes() {
           }
         />
         <Route
+        path ="/home"
+        element={
+          <Homepage/>
+        }
+        />
+        <Route
           path="/courses/:id"
           element={
             <ProtectedRoute allowedRoles={["student", "instructor"]}>
@@ -53,6 +63,11 @@ export default function AppRoutes() {
             </ProtectedRoute>
           }
         />
+        <Route path ="/create-course" element={<ProtectedRoute allowedRoles={['instructor']}><CreateCoursePage/></ProtectedRoute>}/>
+        
+        <Route path="/available"
+        element={ <ProtectedRoute allowedRoles={['student']}><AvailableCoursesPage/></ProtectedRoute> }
+          />
         <Route
           path="/lectures/:lectureId/assignments/:assignmentId"
           element={

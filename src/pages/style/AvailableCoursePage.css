@@ -1,0 +1,110 @@
+/* src/pages/style/AvailableCoursePage.css */
+
+.available-courses-page {
+  max-width: 1200px;
+  margin: 2rem auto;
+  padding: 2rem;
+  background-color: #f9f9f9;
+  border-radius: 12px;
+}
+
+.available-courses-page h2 {
+  text-align: center;
+  margin-bottom: 2rem;
+  color: #333;
+  font-size: 2rem;
+}
+
+.enroll-message {
+  padding: 1rem;
+  margin-bottom: 1.5rem;
+  border-radius: 8px;
+  text-align: center;
+  font-weight: 500;
+  background-color: #e6f9ec; /* Success green */
+  color: #20753a;
+  border: 1px solid #b4e2c1;
+}
+
+.enroll-message.error { /* For error messages */
+  background-color: #fdecea;
+  color: #a94442;
+  border: 1px solid #f5c6cb;
+}
+
+
+.course-list-available {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 1.5rem;
+  list-style: none;
+  padding: 0;
+}
+
+.course-item-available {
+  background-color: #ffffff;
+  border-radius: 10px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.course-item-available:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.12);
+}
+
+.course-info h3 {
+  font-size: 1.25rem;
+  margin-top: 0;
+  margin-bottom: 0.75rem;
+  color: #2c3e50;
+}
+
+.course-info p {
+  margin-bottom: 0.5rem;
+  color: #555;
+  line-height: 1.6;
+}
+
+.course-info p strong {
+  color: #333;
+}
+
+.enroll-button {
+  margin-top: 1rem;
+  padding: 0.6rem 1.2rem;
+  background-color: #2f80ed;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  font-weight: bold;
+  font-size: 1rem;
+  cursor: pointer;
+  align-self: flex-start; /* Don't stretch full width */
+  transition: background-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.enroll-button:hover {
+  background-color: #1c6dd0;
+  box-shadow: 0 2px 8px rgba(47, 128, 237, 0.3);
+}
+
+.enroll-button:disabled {
+  background-color: #a0a0a0;
+  cursor: not-allowed;
+  box-shadow: none;
+}
+
+.empty-state {
+    background-color: #f0f0f0;
+    padding: 1.5rem;
+    border-radius: 8px;
+    text-align: center;
+    color: #777;
+    font-style: italic;
+    grid-column: 1 / -1; /* Span full width if in a grid */
+}

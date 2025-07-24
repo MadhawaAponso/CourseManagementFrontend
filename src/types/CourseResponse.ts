@@ -14,3 +14,13 @@ export interface CourseResponseDTO {
   lectures: LectureResponseDTO[];
   feedbacks: CourseFeedbackResponseDTO[];
 }
+
+export interface CourseRequestDTO {
+  courseCode:    string;
+  courseName:    string;
+  description?:  string;
+  instructorId:  number;
+  createdById:   number;
+  startDate:     string; 
+  endDate:       string; 
+}

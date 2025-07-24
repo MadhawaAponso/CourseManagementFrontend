@@ -6,14 +6,10 @@ import type { LoginRequest } from '../types/Users';
 import './style/Login.css';
 
 const Login: React.FC = () => {
-  // in <Loginrequest> is like a type of the state
   const [form, setForm] = useState<LoginRequest>({ username: '', password: '' });
   const [error, setError] = useState<string | null>(null);
-
-  //teleport user to another url;
   const navigate = useNavigate();
 
-  // this is for any input field
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
     setForm(prev => ({ ...prev, [name]: value }));
@@ -26,7 +22,6 @@ const Login: React.FC = () => {
       const res = await loginUser(form);
       localStorage.setItem('token', res.access_token);
       navigate('/dashboard');
-      // TODO: Navigate or set auth context
     } catch (err: any) {
       console.error('Login error:', err?.response?.data);
       setError('❌ Login failed. Please check your credentials.');
@@ -34,19 +29,44 @@ const Login: React.FC = () => {
   };
 
   return (
-  <div className="login-wrapper">
-    <div className="login-box">
-      <h2>Login</h2>
-      {error && <p className="field-error">{error}</p>}
-      <form onSubmit={handleSubmit}>
-        <input name="username" placeholder="Username" value={form.username} onChange={handleChange} required />
-        <input type="password" name="password" placeholder="Password" value={form.password} onChange={handleChange} required />
-        <button type="submit">Login</button>
-      </form>
-    </div>
-  </div>
-);
+    <div className="login-wrapper">
+      <div className="login-box">
+        <h2>Login</h2>
+        {error && <p className="field-error">{error}</p>}
 
+        <form onSubmit={handleSubmit}>
+          <input
+            name="username"
+            placeholder="Username"
+            value={form.username}
+            onChange={handleChange}
+            required
+          />
+          <input
+            type="password"
+            name="password"
+            placeholder="Password"
+            value={form.password}
+            onChange={handleChange}
+            required
+          />
+          <button type="submit">Login</button>
+        </form>
+
+        {/* New bit: go register */}
+        <div className="register-cta">
+          <p>Don't have an account?</p>
+          <button
+            type="button"
+            className="register-button"
+            onClick={() => navigate('/register')}
+          >
+            Register
+          </button>
+        </div>
+      </div>
+    </div>
+  );
 };
 
 export default Login;

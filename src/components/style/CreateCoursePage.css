@@ -1,0 +1,81 @@
+/* src/components/style/CreateCoursePage.css */
+
+.create-course-page {
+  max-width: 600px;
+  margin: 2rem auto;
+  padding: 2.5rem;
+  background-color: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+.create-course-page h2 {
+  text-align: center;
+  font-size: 2rem;
+  margin-bottom: 2rem;
+  color: #333;
+}
+
+.create-course-page form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.create-course-page input,
+.create-course-page textarea {
+  width: 100%;
+  padding: 0.75rem;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 1rem;
+  font-family: inherit;
+}
+
+.create-course-page textarea {
+  resize: vertical;
+  min-height: 100px;
+}
+
+.create-course-page label {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  font-weight: bold;
+  color: #555;
+}
+
+.create-course-page button[type="submit"] {
+  padding: 0.75rem;
+  background-color: #2f80ed;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  font-weight: bold;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.2s ease, box-shadow 0.2s ease;
+  margin-top: 1rem;
+}
+
+.create-course-page button[type="submit"]:hover {
+  background-color: #1c6dd0;
+  box-shadow: 0 2px 8px rgba(47, 128, 237, 0.3);
+}
+
+.create-course-page button[type="submit"]:disabled {
+  background-color: #a0a0a0;
+  cursor: not-allowed;
+  box-shadow: none;
+}
+
+.field-error {
+  color: #a94442;
+  background-color: #fdecea;
+  border: 1px solid #f5c6cb;
+  padding: 1rem;
+  border-radius: 6px;
+  text-align: center;
+  font-weight: bold;
+  margin-bottom: 1rem;
+}
