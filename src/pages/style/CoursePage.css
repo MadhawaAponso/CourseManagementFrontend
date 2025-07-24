@@ -42,6 +42,26 @@
   color: #2c3e50;
 }
 
+/* “Add Lecture” Button */
+.add-lecture-btn {
+  display: inline-block;
+  margin-bottom: 1.5rem;
+  padding: 0.75rem 1.25rem;
+  background-color: #2f80ed;
+  color: #fff;
+  font-size: 1rem;
+  font-weight: 500;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.2s ease, transform 0.1s ease;
+}
+
+.add-lecture-btn:hover {
+  background-color: #1c6dd0;
+  transform: translateY(-1px);
+}
+
 /* Section Styling */
 .lectures-section,
 .feedbacks-section {
@@ -97,23 +117,20 @@
   color: inherit;
 }
 
-/* Specific styling for your React-Router Link wrapping the summary */
+/* Lecture Summary Link */
 .lecture-summary {
   display: block;
-  color: inherit;
-  text-decoration: none;
   padding: 0.5rem 0;
+  color: inherit;
 }
 
 .lecture-summary:hover {
-  /* same hover highlight as other links */
   color: #1c6dd0;
   background-color: rgba(47, 128, 237, 0.1);
   border-radius: 4px;
-  text-decoration: none;
 }
 
-/* “Join Lecture” link styling */
+/* “Join Lecture” Link */
 .join-link a {
   display: inline-block;
   margin-top: 0.75rem;
@@ -127,7 +144,28 @@
   color: #1c6dd0;
   background-color: rgba(47, 128, 237, 0.1);
   border-radius: 4px;
-  text-decoration: none;
+}
+
+/* Instructor Controls (Edit / Delete) */
+.instructor-controls {
+  margin-top: 1rem;
+  display: flex;
+  gap: 0.5rem;
+}
+
+.instructor-controls button {
+  padding: 0.5rem 0.75rem;
+  background-color: #ffffff;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: background-color 0.2s ease, border-color 0.2s ease;
+}
+
+.instructor-controls button:hover {
+  background-color: #f0f0f0;
+  border-color: #bbb;
 }
 
 /* Empty State */
@@ -138,4 +176,13 @@
   text-align: center;
   color: #777;
   font-style: italic;
+}
+
+/* Feedback Section Wrapper */
+/* Make sure to wrap your <FeedbackSection> in a <section className="feedbacks-section"> */
+.feedbacks-section {
+  background-color: #ffffff;
+  border-radius: 12px;
+  padding: 2rem;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
 }

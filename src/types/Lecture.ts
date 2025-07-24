@@ -24,5 +24,5 @@ export interface LectureRequestDTO {
   scheduledDate: string;  // ISO date (e.g. "2025-08-01")
   weekNumber: number;
   onlineLectureLink?: string;
-  courseId: number;
+  // courseId: number;
 }

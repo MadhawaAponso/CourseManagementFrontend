@@ -1,8 +1,5 @@
-
-
-// src/hooks/useAuth.ts
 import { useMemo } from "react";
-import { jwtDecode } from "jwt-decode";
+import {jwtDecode} from "jwt-decode";
 
 export interface JwtPayload {
   exp: number;
@@ -12,7 +9,6 @@ export interface JwtPayload {
 }
 
 export function useAuth() {
-  // read token each rendergit commit -m "first commit"
   const token = localStorage.getItem("token");
 
   return useMemo(() => {
@@ -30,15 +26,12 @@ export function useAuth() {
       const decoded = jwtDecode<JwtPayload>(token);
       const expired = decoded.exp * 1000 < Date.now();
       const roles = decoded.realm_access?.roles ?? [];
-      const isInstructor = roles.includes("instructor");
-      const isStudent = roles.includes("student");
-
       return {
         isAuthenticated: !expired,
         roles,
         userId: decoded.userId,
-        isInstructor,
-        isStudent,
+        isInstructor: roles.includes("instructor"),
+        isStudent: roles.includes("student"),
       };
     } catch {
       return {

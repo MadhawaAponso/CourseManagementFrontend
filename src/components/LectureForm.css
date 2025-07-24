@@ -1,0 +1,83 @@
+/* src/components/LectureForm.css */
+
+.lecture-form {
+  background-color: #ffffff;
+  padding: 2rem;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+  max-width: 500px;
+  margin: 2rem auto;
+}
+
+.lecture-form input,
+.lecture-form textarea {
+  width: 100%;
+  padding: 0.75rem;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 1rem;
+  font-family: inherit;
+}
+
+.lecture-form textarea {
+  resize: vertical;
+  min-height: 100px;
+}
+
+.lecture-form label {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  font-weight: bold;
+  color: #555;
+}
+
+.form-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 1rem;
+  margin-top: 1rem;
+  border-top: 1px solid #e0e0e0;
+  padding-top: 1.5rem;
+}
+
+.form-actions button {
+  padding: 0.6rem 1.2rem;
+  border: none;
+  border-radius: 6px;
+  font-weight: bold;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+/* Primary action button (Create/Update) */
+.form-actions button[type="submit"] {
+  background-color: #2f80ed;
+  color: white;
+}
+
+.form-actions button[type="submit"]:hover {
+  background-color: #1c6dd0;
+  box-shadow: 0 2px 8px rgba(47, 128, 237, 0.3);
+}
+
+.form-actions button[type="submit"]:disabled {
+  background-color: #a0a0a0;
+  cursor: not-allowed;
+  box-shadow: none;
+}
+
+/* Secondary action button (Cancel) */
+.form-actions button[type="button"] {
+  background-color: #f0f0f0;
+  color: #333;
+  border: 1px solid #ccc;
+}
+
+.form-actions button[type="button"]:hover {
+  background-color: #e0e0e0;
+}

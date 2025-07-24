@@ -1,0 +1,97 @@
+### Project Overview
+
+This is a React-based frontend for a Course Management System, built with TypeScript and Vite. It uses `react-router-dom` for navigation and Axios for communicating with a backend API. The application supports different user roles (student and instructor) and protects routes accordingly.
+
+### Directory and File Breakdown
+
+#### `src/` - The main source code directory.
+
+*   **`main.tsx`**: The application's entry point. It renders the root `App` component into the DOM and wraps it with `BrowserRouter` to enable routing.
+*   **`App.tsx`**: The main component of the application. It simply renders the `AppRoutes` component, which controls the application's page navigation.
+*   **`index.css`**: Used for global CSS styles that apply to the entire application.
+*   **`vite-env.d.ts`**: TypeScript declaration file for Vite-specific environment variables.
+
+---
+
+#### `src/assets/`
+
+Contains static assets.
+*   **`luffy.jpg`**: Image file, likely used as a placeholder or profile picture.
+*   **`react.svg`**: The React logo icon.
+
+---
+
+#### `src/components/`
+
+Contains reusable React components used across different pages.
+
+*   **`Layout.tsx`**: A structural component that wraps pages needing a consistent layout. It renders the `Navbar` and an `Outlet` for the child routes, ensuring the navigation bar is present on all main pages.
+*   **`Navbar.tsx` & `Navbar.css`**: The application's navigation bar. It provides links to the Dashboard and "My Courses" and includes a logout button.
+*   **`ProtectedRoute.tsx`**: A higher-order component that restricts access to routes based on user authentication and roles (`student`, `instructor`). It redirects users to the login or an "unauthorized" page if they don't have the required permissions.
+*   **`AssignmentForm.tsx`**: A form for creating or editing an assignment.
+*   **`AssignmentSubmissionForm.tsx`**: A form for students to submit their answers for an assignment.
+*   **`LectureForm.tsx`**: A form for creating or editing a lecture.
+*   **`courseNoteForm.tsx`**: A form for uploading files as course notes for a lecture.
+
+---
+
+#### `src/hooks/`
+
+Contains custom React hooks for shared logic.
+
+*   **`useAuth.tsx`**: A crucial custom hook that provides authentication context. It decodes the JWT stored in `localStorage` to determine if the user is authenticated, their roles (`student`, `instructor`), and their user ID.
+
+---
+
+#### `src/pages/`
+
+Contains the main page components for each route.
+
+*   **`Login.tsx` & `style/Login.css`**: The user login page.
+*   **`Register.tsx` & `style/Register.css`**: The user registration page.
+*   **`Dashboard.tsx` & `style/Dashboard.css`**: The main landing page after login. It displays a welcome message, the current date, and lists upcoming lectures and assignments for the user.
+*   **`EnrolledCoursesPage.tsx` & `style/EnrolledCoursesPage.css`**: Displays a list of courses the user is either enrolled in (as a student) or teaching (as an instructor).
+*   **`CoursePage.tsx` & `style/CoursePage.css`**: Shows the detailed view of a single course, including its description, instructor, and a list of all its lectures. It also includes the `FeedbackSection`.
+*   **`Lecture.tsx` & `style/LecturePage.css`**: Displays the details of a single lecture, including its associated notes and assignments.
+*   **`AssignmentPage.tsx` & `style/AssignmentPage.css`**: Shows the full details of an assignment. Students can view their past submissions or submit the assignment from this page.
+*   **`FeedbackSection.tsx` & `style/FeedbackSection.css`**: A component used within `CoursePage`. It allows students to submit ratings and feedback for the course and allows instructors to view all submitted feedback.
+*   **`AlertMessage.tsx` & `style/AlertMessage.css`**: A simple component for displaying success or error notifications.
+*   **`Unautherized.tsx`**: A page shown when a user tries to access a route they do not have the correct role for.
+
+---
+
+#### `src/routes/`
+
+Contains the routing logic for the application.
+
+*   **`AppRoutes.tsx`**: Defines all URL paths using `react-router-dom`. It maps paths like `/dashboard`, `/courses/:id`, etc., to their corresponding page components. It uses the `Layout` component to apply the navbar to protected routes and `ProtectedRoute` to enforce authentication and role-based access control.
+
+---
+
+#### `src/services/`
+
+Handles all communication with the backend API.
+
+*   **`axios.tsx`**: A pre-configured Axios instance. It sets the base URL for all API requests and uses an interceptor to automatically attach the user's JWT authentication token to the headers of every request.
+*   **`authService.tsx`**: Contains functions for user authentication, including `registerUser`, `loginUser` (which communicates with a Keycloak server), and `logoutUser`.
+*   **`userService.tsx`**: Fetches user-specific data, such as the current user's profile.
+*   **`lectureService.tsx`**: Contains functions for all lecture-related API calls (fetching, creating, updating).
+*   **`assignmentService.tsx`**: Contains functions for assignment-related API calls.
+*   **`submissionService.tsx`**: Handles submitting assignments and fetching a user's past submissions.
+*   **`courseNoteService.tsx`**: Manages API calls for course notes.
+
+---
+
+#### `src/types/`
+
+Contains TypeScript type definitions (interfaces) for data structures.
+
+*   This directory defines the shape of the data transferred between the frontend and backend (Data Transfer Objects or DTOs). Each file (`Assignments.ts`, `Lecture.ts`, `Users.tsx`, etc.) contains interfaces that describe the respective data models, ensuring type safety throughout the application.
+
+---
+
+#### `src/utils/`
+
+Contains miscellaneous utility functions.
+
+*   **`jwt.ts`**: Provides helper functions for working with JSON Web Tokens, such as extracting user roles from the token payload.
