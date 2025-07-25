@@ -1,0 +1,82 @@
+/* src/components/style/courseNoteForm.css */
+
+.note-form {
+  background-color: #ffffff;
+  padding: 2rem;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+  max-width: 550px;
+  margin: 2rem auto;
+  border: 1px solid #e0e0e0;
+}
+
+.note-form input[type="text"],
+.note-form input[type="file"] {
+  width: 100%;
+  padding: 0.75rem;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 1rem;
+  font-family: inherit;
+}
+
+.note-form input[type="file"] {
+    font-size: 0.9rem;
+    color: #555;
+}
+
+/* Style for the file input button */
+.note-form input[type="file"]::file-selector-button {
+    padding: 0.5rem 1rem;
+    border-radius: 5px;
+    background-color: #f0f0f0;
+    border: 1px solid #ccc;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+.note-form input[type="file"]::file-selector-button:hover {
+    background-color: #e0e0e0;
+}
+
+.note-form .actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 1rem;
+  margin-top: 1rem;
+  border-top: 1px solid #e0e0e0;
+  padding-top: 1.5rem;
+}
+
+.note-form .actions button {
+  padding: 0.6rem 1.2rem;
+  border: none;
+  border-radius: 6px;
+  font-weight: bold;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.note-form .actions button[type="submit"] {
+  background-color: #28a745; /* Green for upload */
+  color: white;
+}
+
+.note-form .actions button[type="submit"]:hover {
+  background-color: #218838;
+}
+
+.note-form .actions button[type="button"] {
+  background-color: #f0f0f0;
+  color: #333;
+  border: 1px solid #ccc;
+}
+
+.note-form .actions button[type="button"]:hover {
+  background-color: #e0e0e0;
+}

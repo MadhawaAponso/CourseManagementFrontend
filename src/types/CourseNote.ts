@@ -8,10 +8,10 @@ export interface CourseNoteResponseDTO {
   lectureTitle: string;
 }
 
-export interface CourseNoteRequestDTO{
-  lectureId:number;
-  noteTitle:string;
-  filePath:string;
-  fileType:string;
-  uploadedBy:number
+export interface CourseNoteRequestDTO {
+  lectureId: number;
+  noteTitle:  string;
+  filePath:   string;
+  fileType?:  string;
+  uploadedBy: number;
 }

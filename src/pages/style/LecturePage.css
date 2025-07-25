@@ -53,14 +53,17 @@
   text-decoration: underline;
 }
 
-/* Assignments Section */
+/* Notes and Assignments Sections */
+.notes-section,
 .assignments-section {
   background-color: #ffffff;
   padding: 2rem;
   border-radius: 12px;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.07);
+  margin-bottom: 2.5rem;
 }
 
+.notes-section h3,
 .assignments-section h3 {
   font-size: 1.75rem;
   color: #333;
@@ -69,11 +72,11 @@
   padding-bottom: 0.5rem;
 }
 
-/* Add Assignment Button */
+/* Add/Upload Buttons */
+.add-note-btn,
 .assignments-section > button {
   margin-bottom: 1.5rem;
   padding: 0.75rem 1.25rem;
-  background-color: #28a745;
   color: #fff;
   font-size: 1rem;
   font-weight: 500;
@@ -83,12 +86,24 @@
   transition: background-color 0.2s ease, transform 0.1s ease;
 }
 
-.assignments-section > button:hover {
-  background-color: #218838;
-  transform: translateY(-1px);
+.add-note-btn {
+  background-color: #17a2b8; /* Teal for notes */
 }
 
-/* Assignment List */
+.add-note-btn:hover {
+  background-color: #138496;
+}
+
+.assignments-section > button {
+  background-color: #28a745; /* Green for assignments */
+}
+
+.assignments-section > button:hover {
+  background-color: #218838;
+}
+
+/* Note and Assignment Lists */
+.note-list,
 .assignment-list {
   list-style: none;
   padding: 0;
@@ -97,25 +112,33 @@
   gap: 1.5rem;
 }
 
+.note-item,
 .assignment-item {
   background-color: #f8f9fa;
   border-radius: 10px;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.07);
+  padding: 1.5rem;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 1.5rem;
   transition: box-shadow 0.2s ease;
 }
 
+.note-item:hover,
 .assignment-item:hover {
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 }
 
+.note-item a,
 .assignment-item a {
   text-decoration: none;
   color: inherit;
   flex-grow: 1;
+}
+
+.note-item a {
+  font-weight: bold;
+  color: #17a2b8;
 }
 
 .assignment-item h4 {
@@ -124,18 +147,22 @@
   color: #2f80ed;
 }
 
+.note-item p,
 .assignment-item p {
-  margin: 0;
+  margin: 0.25rem 0 0 0;
   color: #555;
+  font-size: 0.9rem;
 }
 
-/* Instructor Controls for Assignments */
+/* Instructor Controls */
+.note-item button,
 .assignment-item .instructor-controls {
   display: flex;
   gap: 0.75rem;
   margin-left: 1.5rem;
 }
 
+.note-item button,
 .assignment-item .instructor-controls button {
   padding: 0.5rem 1rem;
   border: 1px solid #ccc;
@@ -145,22 +172,24 @@
   transition: background-color 0.2s ease, border-color 0.2s ease;
 }
 
+/* Edit Buttons */
 .assignment-item .instructor-controls button:first-of-type {
   background-color: #e9f5ff;
   color: #007bff;
   border-color: #b8daff;
 }
-
 .assignment-item .instructor-controls button:first-of-type:hover {
   background-color: #d1e9ff;
 }
 
+/* Delete Buttons */
+.note-item button,
 .assignment-item .instructor-controls button:last-of-type {
   background-color: #fdecea;
   color: #dc3545;
   border-color: #f5c6cb;
 }
-
+.note-item button:hover,
 .assignment-item .instructor-controls button:last-of-type:hover {
   background-color: #f8d7da;
 }
@@ -175,4 +204,5 @@
   font-style: italic;
   margin-top: 1.5rem;
 }
+
 
