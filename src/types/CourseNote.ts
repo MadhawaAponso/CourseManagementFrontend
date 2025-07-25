@@ -3,7 +3,7 @@ export interface CourseNoteResponseDTO {
   noteTitle: string;
   filePath: string;
   fileType: string;
-  uploadedAt: string;
+  uploadedAt: number;
   uploadedBy: string;
   lectureTitle: string;
 }

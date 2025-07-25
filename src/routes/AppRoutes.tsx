@@ -17,14 +17,14 @@ import CreateCoursePage from "../components/CreateCoursePage";
 export default function AppRoutes() {
   return (
     <Routes>
-      {/* Routes without Navbar */}
+      
       <Route path="/login" element={<Login />} />
       <Route path="/register" element={<Register />} />
       <Route path="/unauthorized" element={<Unauthorized />} />
 
-      {/* Routes with Navbar */}
+      
       <Route element={<Layout />}>
-        <Route path="/" element={<Navigate to="/dashboard" replace />} />
+        <Route path="/" element={<Navigate to="/home" replace />} />
         <Route
           path="/dashboard"
           element={

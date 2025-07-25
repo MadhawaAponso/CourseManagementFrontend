@@ -53,13 +53,14 @@
   text-decoration: underline;
 }
 
-/* Notes and Assignments Sections */
-.notes-section,
+/* Assignments Section */
 .assignments-section {
-  margin-bottom: 2.5rem;
+  background-color: #ffffff;
+  padding: 2rem;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.07);
 }
 
-.notes-section h3,
 .assignments-section h3 {
   font-size: 1.75rem;
   color: #333;
@@ -68,45 +69,100 @@
   padding-bottom: 0.5rem;
 }
 
-.notes-section ul,
-.assignments-section ul {
+/* Add Assignment Button */
+.assignments-section > button {
+  margin-bottom: 1.5rem;
+  padding: 0.75rem 1.25rem;
+  background-color: #28a745;
+  color: #fff;
+  font-size: 1rem;
+  font-weight: 500;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.2s ease, transform 0.1s ease;
+}
+
+.assignments-section > button:hover {
+  background-color: #218838;
+  transform: translateY(-1px);
+}
+
+/* Assignment List */
+.assignment-list {
   list-style: none;
   padding: 0;
   margin: 0;
   display: grid;
-  gap: 1rem;
+  gap: 1.5rem;
 }
 
-/* Note and Assignment Items */
-.note-item,
 .assignment-item {
-  background-color: #ffffff;
+  background-color: #f8f9fa;
   border-radius: 10px;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.07);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
   padding: 1.5rem;
+  transition: box-shadow 0.2s ease;
 }
 
-.note-item a {
-  font-size: 1.2rem;
-  font-weight: bold;
-  color: #2f80ed;
+.assignment-item:hover {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.assignment-item a {
   text-decoration: none;
-}
-
-.note-item a:hover {
-  text-decoration: underline;
-}
-
-.note-item p,
-.assignment-item p {
-  margin: 0.5rem 0 0 0;
-  color: #555;
+  color: inherit;
+  flex-grow: 1;
 }
 
 .assignment-item h4 {
   font-size: 1.25rem;
   margin: 0 0 0.5rem 0;
-  color: #333;
+  color: #2f80ed;
+}
+
+.assignment-item p {
+  margin: 0;
+  color: #555;
+}
+
+/* Instructor Controls for Assignments */
+.assignment-item .instructor-controls {
+  display: flex;
+  gap: 0.75rem;
+  margin-left: 1.5rem;
+}
+
+.assignment-item .instructor-controls button {
+  padding: 0.5rem 1rem;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: background-color 0.2s ease, border-color 0.2s ease;
+}
+
+.assignment-item .instructor-controls button:first-of-type {
+  background-color: #e9f5ff;
+  color: #007bff;
+  border-color: #b8daff;
+}
+
+.assignment-item .instructor-controls button:first-of-type:hover {
+  background-color: #d1e9ff;
+}
+
+.assignment-item .instructor-controls button:last-of-type {
+  background-color: #fdecea;
+  color: #dc3545;
+  border-color: #f5c6cb;
+}
+
+.assignment-item .instructor-controls button:last-of-type:hover {
+  background-color: #f8d7da;
 }
 
 /* Empty State */
@@ -117,17 +173,6 @@
   text-align: center;
   color: #777;
   font-style: italic;
+  margin-top: 1.5rem;
 }
 
-/* src/pages/style/LecturePage.css */
-.assignment-link {
-  display: block;
-  text-decoration: none;
-  color: inherit;
-  padding: 1rem;
-  border-radius: 8px;
-  transition: background 0.1s ease;
-}
-.assignment-link:hover {
-  background: rgba(0, 0, 0, 0.03);
-}

@@ -2,16 +2,23 @@
 import { useEffect, useState } from "react";
 import { useParams, Link } from "react-router-dom";
 import api from "../services/axios";
-import "./style/LecturePage.css";
+import { useAuth } from "../hooks/useAuth";
+import AssignmentForm from "../components/AssignmentForm";
 import type { LectureResponseDTO } from "../types/Lecture";
-import type { CourseNoteResponseDTO } from "../types/CourseNote";
 import type { AssignmentResponseDTO } from "../types/Assignments";
+import "./style/LecturePage.css";
 
 export default function LecturePage() {
   const { lectureId } = useParams<{ lectureId: string }>();
+  const { isInstructor } = useAuth();
+
   const [lecture, setLecture] = useState<LectureResponseDTO | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+
+  // Assignment form state
+  const [showForm, setShowForm] = useState(false);
+  const [editing, setEditing] = useState<AssignmentResponseDTO | null>(null);
 
   useEffect(() => {
     if (!lectureId) return;
@@ -19,11 +26,23 @@ export default function LecturePage() {
       .get<LectureResponseDTO>(`/lectures/${lectureId}`)
       .then(res => setLecture(res.data))
       .catch(err => {
-        console.error("Failed to load lecture:", err);
+        console.error(err);
         setError("Could not load lecture details.");
       })
       .finally(() => setLoading(false));
   }, [lectureId]);
+
+  const refresh = () => {
+    if (!lectureId) return;
+    api.get<LectureResponseDTO>(`/lectures/${lectureId}`)
+      .then(res => setLecture(res.data))
+      .catch(console.error);
+  };
+
+  const handleDelete = async (id: number) => {
+    await api.delete(`/assignments/${id}`);
+    refresh();
+  };
 
   if (loading) return <div className="lecture-loading">Loading...</div>;
   if (error) return <div className="lecture-error">{error}</div>;
@@ -31,24 +50,17 @@ export default function LecturePage() {
 
   return (
     <div className="lecture-page">
-      {/* Lecture Header */}
+      {/* Header */}
       <div className="lecture-header-card">
         <h2>{lecture.lectureTitle}</h2>
-        <p>
-          <strong>Course:</strong> {lecture.courseCode} – {lecture.courseName}
-        </p>
+        <p><strong>Course:</strong> {lecture.courseCode} – {lecture.courseName}</p>
         <p>
           <strong>Week:</strong> {lecture.weekNumber} |{" "}
-          <strong>When:</strong>{" "}
-          {new Date(lecture.scheduledDate).toLocaleString()}
+          <strong>When:</strong> {new Date(lecture.scheduledDate).toLocaleString()}
         </p>
         {lecture.onlineLectureLink && (
           <p>
-            <a
-              href={lecture.onlineLectureLink}
-              target="_blank"
-              rel="noreferrer"
-            >
+            <a href={lecture.onlineLectureLink} target="_blank" rel="noreferrer">
               Join Online Lecture
             </a>
           </p>
@@ -56,69 +68,64 @@ export default function LecturePage() {
         <p>{lecture.description}</p>
       </div>
 
-      {/* Notes Section */}
-      <section className="notes-section">
-        <h3>Lecture Notes</h3>
-        {lecture.notes && lecture.notes.length > 0 ? (
-          <ul>
-            {lecture.notes
-              .slice()
-              .sort(
-                (a, b) =>
-                  new Date(a.uploadedAt).getTime() -
-                  new Date(b.uploadedAt).getTime()
-              )
-              .map((note: CourseNoteResponseDTO) => (
-                <li key={note.id} className="note-item">
-                  <a
-                    href={note.filePath}
-                    target="_blank"
-                    rel="noreferrer"
-                    download
-                  >
-                    {note.noteTitle} ({note.fileType.toUpperCase()})
-                  </a>
-                  <p>
-                    Uploaded by {note.uploadedBy} on{" "}
-                    {new Date(note.uploadedAt).toLocaleString()}
-                  </p>
-                </li>
-              ))}
-          </ul>
-        ) : (
-          <p className="empty-state">No notes uploaded.</p>
-        )}
-      </section>
-
-      {/* Assignments Section */}
+      {/* Assignments */}
       <section className="assignments-section">
         <h3>Assignments</h3>
-        {lecture.assignments && lecture.assignments.length > 0 ? (
-          <ul>
+
+        {isInstructor && !showForm && (
+          <button
+            onClick={() => {
+              setEditing(null);
+              setShowForm(true);
+            }}
+          >
+            + Add Assignment
+          </button>
+        )}
+
+        {showForm && (
+          <AssignmentForm
+            initial={editing ?? undefined}
+            lectureId={Number(lectureId)}
+            onCancel={() => setShowForm(false)}
+            onSubmit={async data => {
+              if (editing) {
+                await api.put(`/assignments/${editing.id}`, data);
+              } else {
+                await api.post(`/assignments`, data);
+              }
+              setShowForm(false);
+              setEditing(null);
+              refresh();
+            }}
+          />
+        )}
+
+        {lecture.assignments?.length ? (
+          <ul className="assignment-list">
             {lecture.assignments
               .slice()
-              .sort(
-                (a, b) =>
-                  new Date(a.dueDate).getTime() -
-                  new Date(b.dueDate).getTime()
-              )
+              .sort((a, b) => new Date(a.dueDate).getTime() - new Date(b.dueDate).getTime())
               .map((assn: AssignmentResponseDTO) => (
                 <li key={assn.id} className="assignment-item">
-                  <Link
-                    to={`/lectures/${lectureId}/assignments/${assn.id}`}
-                    className="assignment-link"
-                  >
+                  <Link to={`/lectures/${lectureId}/assignments/${assn.id}`}>
                     <h4>{assn.assignmentTitle}</h4>
-                    <p>{assn.description}</p>
-                    <p>
-                      Due: {new Date(assn.dueDate).toLocaleString()} | Max Score:{" "}
-                      {assn.maxScore}
-                    </p>
-                    <p>
-                      Created by {assn.createdBy} on{" "}
-                      {new Date(assn.createdAt).toLocaleDateString()}
-                    </p>
+                    <p>Due: {new Date(assn.dueDate).toLocaleString()}</p>
                   </Link>
+
+                  {isInstructor && (
+                    <div className="instructor-controls">
+                      <button onClick={() => {
+                        setEditing(assn);
+                        setShowForm(true);
+                      }}>
+                        Edit
+                      </button>
+                      <button onClick={() => handleDelete(assn.id)}>
+                        Delete
+                      </button>
+                    </div>
+                  )}
                 </li>
               ))}
           </ul>
@@ -127,5 +134,5 @@ export default function LecturePage() {
         )}
       </section>
     </div>
-);
+  );
 }

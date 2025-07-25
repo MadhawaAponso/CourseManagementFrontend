@@ -4,7 +4,7 @@ export interface AssignmentResponseDTO {
   description: string;
   dueDate: string;
   maxScore: number;
-  createdBy: string;
+  createdBy: number;
   lectureTitle: string;
   createdAt: string;
   lectureId:number

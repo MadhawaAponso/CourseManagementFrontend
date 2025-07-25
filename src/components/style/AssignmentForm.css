@@ -1,0 +1,84 @@
+/* src/components/style/AssignmentForm.css */
+
+.assignment-form {
+  background-color: #ffffff;
+  padding: 2rem;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+  max-width: 600px;
+  margin: 2rem auto;
+  border: 1px solid #e0e0e0;
+}
+
+.assignment-form input,
+.assignment-form textarea {
+  width: 100%;
+  padding: 0.75rem;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 1rem;
+  font-family: inherit;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.assignment-form input:focus,
+.assignment-form textarea:focus {
+  outline: none;
+  border-color: #2f80ed;
+  box-shadow: 0 0 0 3px rgba(47, 128, 237, 0.2);
+}
+
+.assignment-form textarea {
+  resize: vertical;
+  min-height: 120px;
+}
+
+.assignment-form .actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 1rem;
+  margin-top: 1rem;
+  border-top: 1px solid #e0e0e0;
+  padding-top: 1.5rem;
+}
+
+.assignment-form .actions button {
+  padding: 0.6rem 1.2rem;
+  border: none;
+  border-radius: 6px;
+  font-weight: bold;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+/* Primary action button (Create/Update) */
+.assignment-form .actions button[type="submit"] {
+  background-color: #2f80ed;
+  color: white;
+}
+
+.assignment-form .actions button[type="submit"]:hover {
+  background-color: #1c6dd0;
+  box-shadow: 0 2px 8px rgba(47, 128, 237, 0.3);
+}
+
+.assignment-form .actions button[type="submit"]:disabled {
+  background-color: #a0a0a0;
+  cursor: not-allowed;
+  box-shadow: none;
+}
+
+/* Secondary action button (Cancel) */
+.assignment-form .actions button[type="button"] {
+  background-color: #f0f0f0;
+  color: #333;
+  border: 1px solid #ccc;
+}
+
+.assignment-form .actions button[type="button"]:hover {
+  background-color: #e0e0e0;
+}
